@@ -1,0 +1,24 @@
+{
+  "name": "mern_reta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChloeViei/MERN_Reta.git"
+  },
+  "author": "cvieille",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChloeViei/MERN_Reta/issues"
+  },
+  "homepage": "https://github.com/ChloeViei/MERN_Reta#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.14"
+  }
+}
