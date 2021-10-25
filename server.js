@@ -1,13 +1,36 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
 const userRoutes = require('./routes/user.routes');
 
 require('dotenv').config({ path: './config/.env' })
 require('./config/db');
 const { checkUser, requireAuth } = require('./middleware/auth.middleware');
+
+// Swagger
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "MERN_Reta API",
+            version: "1.0.0",
+            description: "A application to follow your stock"
+        },
+        servers: [
+            {
+                url: "http://localhost:5000"
+            }
+        ]
+    },
+    apis: ['./routes/*.js']
+};
+
+const specs = swaggerJsDoc(options);
+
 const app = express();
 
-
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
