@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const userRoutes = require('./routes/user.routes');
+const itemRoutes = require('./routes/item.routes');
 
 require('dotenv').config({ path: './config/.env' })
 require('./config/db');
@@ -43,7 +44,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 // routes
 app.use('/api/user', userRoutes);
-
+app.use('/api/item', itemRoutes);
 
 // server
 app.listen(process.env.PORT, () => {
