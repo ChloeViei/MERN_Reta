@@ -43,6 +43,16 @@ const userSchema = new mongoose.Schema(
     },
     likes: {
       type: [String]
+    },
+    inventory: {
+      type: [
+        {
+          itemId: String,
+          quantity: Number,
+          timestamps: Number
+        }
+      ],
+      required: true
     }
   },
   {
