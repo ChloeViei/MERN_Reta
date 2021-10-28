@@ -25,7 +25,6 @@
  *          type: string
  *          description: The user password
  *      example:
- *        id: 6175cfd2eb4cf366cc76a13a
  *        pseudo: test
  *        email: test@gmail.com
  *        password: test123
@@ -145,7 +144,7 @@
  *                          $ref: '#/components/schemas/User'
  *          responses:
  *              200:
- *                  description: The user was successfully created
+ *                  description: The user was successfully updated
  *                  content:
  *                      application/json:
  *                          schema:

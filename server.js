@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const userRoutes = require('./routes/user.routes');
-const itemRoutes = require('./routes/item.routes');
+const productRoutes = require('./routes/product.routes');
 
 require('dotenv').config({ path: './config/.env' })
 require('./config/db');
@@ -24,7 +24,7 @@ const options = {
             }
         ]
     },
-    apis: ['./routes/*.js']
+    apis: ['./routes/swagger/*.js']
 };
 
 const specs = swaggerJsDoc(options);
@@ -44,7 +44,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 // routes
 app.use('/api/user', userRoutes);
-app.use('/api/item', itemRoutes);
+app.use('/api/product', productRoutes);
 
 // server
 app.listen(process.env.PORT, () => {

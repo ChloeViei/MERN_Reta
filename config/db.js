@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://' + process.env.DB_USER_PASS + '@cluster0.fzb9l.mongodb.net/mearn', 
+mongoose.connect('mongodb://localhost:27017/off', 
 {
     useNewUrlParser: true,
     useUnifiedTopology: true

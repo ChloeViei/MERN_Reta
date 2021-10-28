@@ -13,7 +13,7 @@ const Unit = {
     VOLUME: "volume"
 };
 
-const ItemSchema = new mongoose.Schema(
+const ProductSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -41,4 +41,4 @@ const ItemSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model('Product', ProductSchema);
