@@ -64,16 +64,74 @@
  */
 
 
-
-
-// REMOVE ELEMENT PRODUCT
+// INFO PRODUCT
 
 /**
  * @swagger
  * paths:
- *  /api/product/{element}:
+ *  /api/product/{id}:
+ *      get:
+ *          summary: Returns the product by id
+ *          tags: [Products]
+ *          parameters:
+ *            - name: id
+ *              in: path
+ *              schema:
+ *                  type: string
+ *              required: true
+ *              description: The product id
+ *          responses:
+ *              200:
+ *                  description: The product description by id
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/Product'
+ *              400:
+ *                  description: The product was not found
+ */
+
+
+// CREATE PRODUCT
+
+/**
+ * @swagger
+ * paths:
+ *  /api/product/:
+ *      post:
+ *          summary: Create a new product
+ *          tags: [Products]
+ *          requestBody:
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Product'
+ *          responses:
+ *              200:
+ *                  description: The product was successfully created
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/Product'
+ *              500:
+ *                  description: Some server error
+ */
+
+
+
+// REMOVE ELEMENT IN PRODUCT
+
+/**
+ * @swagger
+ * paths:
+ *  /api/product/{id}:
  *      put:
- *          summary: Remove element in the product
+ *          summary: Remove element in product by id
  *          tags: [Products]
  *          parameters:
  *            - name: element
@@ -92,4 +150,3 @@
  *                              items:
  *                                  $ref: '#/components/schemas/Product'
  */
-

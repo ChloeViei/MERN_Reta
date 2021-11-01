@@ -9,7 +9,7 @@ module.exports.getAllProducts = async (req, res) => {
         } else {
             console.log('Error to get data: ' + err);
         }
-    })
+    }).limit(5);
 }
 
 module.exports.createProduct = async (req, res) => {
@@ -50,6 +50,30 @@ module.exports.updateProduct = async (req, res) => {
     )
 }
 
+module.exports.removeElementInProduct = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id)){
+        return res.status(400).send('ID unknown : ' + req.params.id)
+    };
+
+    const updateElement =  req.body.element;
+
+    ItemModel.findByIdAndUpdate(
+        req.params.id,
+        {
+            $unset: { updateElement: undefined }
+        },
+        { new: true},
+        (err, docs) => {
+            if (!err) {
+                res.send(docs);
+            } else {
+                console.log("Update error : " + err);
+            }
+        }
+    )
+}
+
+
 module.exports.deleteProduct = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id);
@@ -71,10 +95,23 @@ module.exports.deleteProduct = async (req, res) => {
 
 
 module.exports.deleteElementInProduct = async (req, res) => {
-
-    ProductModel.findOne({}, function (err, product) {
-        product.req.params.element = undefined;
-        product.save();
-        return res.status(200).json({ message: "Successfully deleted " });
-    });
+    try {
+        ProductModel.updateMany(
+            {}, 
+            {
+                $unset:{ "req.params.element": ""}
+            },
+            (err, res) => {
+                console.log(res);
+            }
+        );
+    } catch (err) {
+        return res.status(500).json({ message: err });
+    }
+    
+    // ProductModel.findOne({_id: req.params.id}, function (err, obj) {
+    //     product.req.params.element = undefined;
+    //     product.save();
+    //     return res.status(200).json({ message: "Successfully deleted " });
+    // });
 }

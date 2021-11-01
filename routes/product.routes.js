@@ -6,9 +6,9 @@ const productController = require('../controllers/product.controller');
 router.get('/', productController.getAllProducts);
 router.post('/', productController.createProduct);
 router.put('/:id', productController.updateProduct);
+router.put('/:id', productController.removeElementInProduct);
 router.delete('/:id', productController.deleteProduct);
 
 // modification OpenFoodFact
-router.put('/:element', productController.deleteElementInProduct);
 
 module.exports = router;
