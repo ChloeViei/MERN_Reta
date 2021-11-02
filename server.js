@@ -1,13 +1,15 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const { checkUser, requireAuth } = require('./middleware/auth.middleware');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
+
 const userRoutes = require('./routes/user.routes');
 const productRoutes = require('./routes/product.routes');
+const stockRoutes = require('./routes/stock.routes');
 
 require('dotenv').config({ path: './config/.env' })
 require('./config/db');
-const { checkUser, requireAuth } = require('./middleware/auth.middleware');
 
 // Swagger
 const options = {
@@ -45,6 +47,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 // routes
 app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/stock/', stockRoutes);
 
 // server
 app.listen(process.env.PORT, () => {

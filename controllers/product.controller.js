@@ -92,26 +92,3 @@ module.exports.deleteProduct = async (req, res) => {
         return res.status(500).json({ message: err });
     }
 };
-
-
-module.exports.deleteElementInProduct = async (req, res) => {
-    try {
-        ProductModel.updateMany(
-            {}, 
-            {
-                $unset:{ "req.params.element": ""}
-            },
-            (err, res) => {
-                console.log(res);
-            }
-        );
-    } catch (err) {
-        return res.status(500).json({ message: err });
-    }
-    
-    // ProductModel.findOne({_id: req.params.id}, function (err, obj) {
-    //     product.req.params.element = undefined;
-    //     product.save();
-    //     return res.status(200).json({ message: "Successfully deleted " });
-    // });
-}
