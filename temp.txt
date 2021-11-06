@@ -1,0 +1,6 @@
+
+### Expressive Query Operator
+
+- $expr             = allows the use of aggregation expressions within the query language 
+>`{ $expr: { <expression> } }`
+- $expr             = allows us to variables and conditional statements

@@ -160,7 +160,7 @@
  * @swagger
  * paths:
  *  /api/user/{id}:
- *      deelete:
+ *      delete:
  *          summary: Remove the user by the id
  *          tags: [Users]
  *          parameters:
@@ -173,6 +173,57 @@
  *          responses:
  *              200:
  *                  description: The user was deleted
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/User'
+ */
+
+
+
+/**
+ * @swagger
+ * tags:
+ *  name: Inventory
+ *  description: The inventory managing API
+ */
+
+// CREATE ELEMENT INVENTORY
+
+/**
+ * @swagger
+ * paths:
+ *  /api/user/inventory/{id}:
+ *      patch:
+ *          summary: Create element in inventory of the user by the id
+ *          tags: [Inventory]
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              schema: 
+ *                  type: string
+ *              required: true
+ *              description: The user id
+ *            - in: body
+ *              name: inventory
+ *              description: The inventory create.
+ *              schema:
+ *                  type: object
+ *              required:
+ *                  - userName
+ *              properties:
+ *                  itemId:
+ *                      type: string
+ *                  quantity:
+ *                      type: integer
+ *              example:
+ *                  itemId: 0000000001311
+ *                  quantity: 10
+ *          responses:
+ *              200:
+ *                  description: The inventory was create
  *                  content:
  *                      application/json:
  *                          schema:

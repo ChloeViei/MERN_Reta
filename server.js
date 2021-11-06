@@ -9,7 +9,7 @@ const productRoutes = require('./routes/product.routes');
 const stockRoutes = require('./routes/stock.routes');
 
 require('dotenv').config({ path: './config/.env' })
-require('./config/db');
+require('./config/db.config');
 
 // Swagger
 const options = {

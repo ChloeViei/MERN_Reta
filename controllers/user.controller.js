@@ -129,4 +129,91 @@ module.exports.unfollow = async (req, res) => {
     } catch (err) {
         return res.status(500).json({ message: err });
     }
+};
+
+module.exports.inventoryUser = (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown : " + req.params.id);
+    
+    try {
+        return UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $push: {
+                    inventory: {
+                        productId: req.body.productId,
+                        quantity: req.body.quantity,
+                        timestamps: new Date().getTime()
+                    },
+                },
+            },
+            {new: true},
+            (err, docs) => {
+                if (!err) {
+                    return res.send(docs);
+                } else {
+                    return res.status(400).send(err);
+                }
+            }
+        );
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+};
+
+
+module.exports.editInventoryUser = (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown : " + req.params.id);
+    
+    try {
+        UserModel.findOneAndUpdate(
+            {
+                "inventory._id": req.params.id
+            },
+            {
+                $set: {
+                    "inventory.$.quantity": req.body.quantity,
+                },
+            },
+            { new: true, upsert: true, setDefaultsOnInsert: true },
+            (err, docs) => {
+                if (err) {
+                    return res.status(500).send({ message: err });
+                }
+                return res.send(docs);
+            }
+        );
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+};
+
+
+module.exports.deleteInventoryUser= (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown : " + req.params.id);
+
+    try {
+        return UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull: {
+                    inventory: {
+                        _id: req.body.inventoryId,
+                    }
+                }
+            },
+            {new: true},
+            (err, docs) => {
+                if (!err) {
+                    return res.status(200).send(docs);
+                } else {
+                    return res.status(400).send(err);
+                }
+            }
+        )
+    } catch (err) {
+        return res.status(400).send(err);
+    }
 }

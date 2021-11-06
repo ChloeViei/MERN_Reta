@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     inventory: {
       type: [
         {
-          itemId: String,
+          productId: String,
           quantity: Number,
           timestamps: Number
         }
